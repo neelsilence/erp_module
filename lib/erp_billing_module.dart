@@ -1,6 +1,7 @@
 library erp_billing_module;
 
 export 'core/models/billing_models.dart';
+export 'core/models/erp_models.dart';
 export 'core/utils/gst_calculator.dart';
 export 'data/repositories/invoice_repository.dart';
 export 'services/billing_pdf_service.dart';

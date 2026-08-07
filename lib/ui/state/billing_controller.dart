@@ -22,11 +22,20 @@ class BillingController extends ChangeNotifier {
   final BillingPdfService _billingPdfService;
   final GstCalculator _gstCalculator;
 
+  bool _disposed = false;
+
   List<Invoice> _invoices = const [];
   List<Invoice> get invoices => _invoices;
 
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
+  }
+
   Future<void> loadInvoices() async {
     _invoices = await _invoiceRepository.getInvoices();
+    if (_disposed) return;
     notifyListeners();
   }
 
@@ -36,7 +45,9 @@ class BillingController extends ChangeNotifier {
 
   Future<void> createInvoice(Invoice invoice) async {
     await _invoiceRepository.createInvoice(invoice);
+    if (_disposed) return;
     await _inventoryService.syncInvoice(invoice);
+    if (_disposed) return;
     await loadInvoices();
   }
 

@@ -1,8 +1,8 @@
 import 'customer.dart';
 import 'invoice_item.dart';
 
-class Invoice {
-  const Invoice({
+class InvoiceModel {
+  const InvoiceModel({
     required this.id,
     required this.customer,
     required this.items,
@@ -24,8 +24,8 @@ class Invoice {
   final DateTime createdAt;
   final String status;
 
-  factory Invoice.fromJson(Map<String, dynamic> json) {
-    return Invoice(
+  factory InvoiceModel.fromJson(Map<String, dynamic> json) {
+    return InvoiceModel(
       id: json['id'] as String,
       customer: Customer.fromJson(json['customer'] as Map<String, dynamic>),
       items: (json['items'] as List<dynamic>)
